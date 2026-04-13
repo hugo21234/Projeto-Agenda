@@ -1,0 +1,6 @@
+{
+  "watch": ["server.js", "src"],
+  "ext": "js,json,ejs",
+  "ignore": ["public/assets/bundle.js"],
+  "exec": "node server.js"
+}
