@@ -18,10 +18,14 @@ globalMiddleware.checkCsrfError = (err, req, res, next) => {
       mensagem: 'Token CSRF invalido ou expirado. Tente recarregar a pagina.',
     });
   }
-
   return next(err);
 };
 
+exports.checkCsrfError = (err, req, res, next) => {
+  if (err && err.code === 'EBADCSRFTOKEN') {
+    return res.render('404')
+  }};
+  
 globalMiddleware.csrfMiddleware = (req, res, next) => {
   res.locals.csrfToken = req.csrfToken ? req.csrfToken() : '';
   next();
