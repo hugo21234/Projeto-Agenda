@@ -1,11 +1,23 @@
-<!-- Navbar principal compartilhada entre as paginas. -->
+<%#
+  Arquivo: views/includes/nav.ejs
+  Papel: navbar compartilhada entre páginas.
+  Conexão: depende de `usuario` em `res.locals`, definido por globalMiddleware.
+%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">Projeto Agenda</a>
-    <!-- Links principais de navegacao. -->
-    <div class="ms-auto">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
         <% if (!usuario) { %>
+          <!-- Sem sessão ativa: mostra entrada para login/cadastro. -->
           <li class="nav-item">
             <a class="nav-link" href="/login/index">Login</a>
           </li>
@@ -13,8 +25,12 @@
             <a class="nav-link" href="/login/index">Registre-se</a>
           </li>
         <% } else { %>
+          <!-- Sessão ativa: mostra identidade básica do usuário logado. -->
           <li class="nav-item">
             <span class="nav-link">Logado: <%= usuario.email %></span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/criar-contato/index">Novo Contato</a>
           </li>
           <li class="nav-item">
             <form action="/login/logout" method="POST" class="d-flex align-items-center">

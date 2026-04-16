@@ -1,3 +1,8 @@
+<%#
+  Arquivo: views/index.ejs
+  Papel: página inicial da aplicação (dashboard simples da agenda).
+  Conexão: renderizado por `homeController.index` e reutiliza includes de layout.
+%>
 <%- include('includes/head', { titulo }) %>
 <%- include('includes/nav') %>
 <%- include('includes/messages') %>
@@ -22,10 +27,11 @@
                 <strong><%= contato.nome %></strong><br>
                 <small><%= contato.email %></small>
               </div>
-              <span><%= contato.number %></span>
-            <td><a href="/contato/index/<%= contato._id%>">editar</a></td>
-            <td><a class="text-danger" href="/contato/delete/<%= contato._id%>">excluir</a></td>
-            
+              <div class="d-flex gap-3 align-items-center">
+                <span><%= contato.number %></span>
+                <a href="/contato/index/<%= contato._id %>">editar</a>
+                <a class="text-danger" href="/contato/delete/<%= contato._id %>">excluir</a>
+              </div>
             </li>
           <% }) %>
         </ul>

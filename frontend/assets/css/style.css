@@ -1,3 +1,12 @@
+/*
+  Arquivo: frontend/assets/css/style.css
+  Papel: estilos utilitários para páginas estáticas (ex.: `sobre.ejs`).
+  Conexão: carregado via `<link rel="stylesheet" href="/css/style.css">`.
+
+  🧠 Aprendizado:
+  Separar estilo da lógica mantém responsabilidades claras e facilita evolução visual.
+*/
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -47,7 +56,7 @@ label {
   margin-bottom: 12px;
 }
 
-input[type="text"] {
+input[type='text'] {
   padding: 14px 16px;
   font-size: 16px;
   border: 1px solid #d1d5db;
@@ -56,7 +65,7 @@ input[type="text"] {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-input[type="text"]:focus {
+input[type='text']:focus {
   outline: none;
   border-color: #117a8b;
   box-shadow: 0 0 0 3px rgba(17, 122, 139, 0.1);

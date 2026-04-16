@@ -1,6 +1,4 @@
-// src/controllers/homeController.js
 const HomeModel = require('../models/HomeModel');
-
 
 exports.index = async (req, res) => {
   try {
@@ -17,4 +15,10 @@ exports.index = async (req, res) => {
       contatos: [],
     });
   }
+};
+
+exports.sobre = (req, res) => {
+  res.render('sobre', {
+    titulo: 'Sobre o Projeto',
+  });
 };

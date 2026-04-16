@@ -1,16 +1,41 @@
-// Middleware global: roda em todas as rotas e centraliza dados comuns para as views.
+/**
+ * Middleware global da aplicação.
+ *
+ * Papel no sistema:
+ * - Injetar dados comuns em `res.locals` para todas as views.
+ * - Centralizar tratamento de erro CSRF.
+ *
+ * Conexão com outros arquivos:
+ * - Registrado em `server.js` antes das rotas.
+ * - Dados definidos aqui são consumidos pelos templates em `views/includes`.
+ */
+
+/**
+ * Disponibiliza mensagens flash, sessão e token CSRF para o EJS.
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
 const globalMiddleware = (req, res, next) => {
-  // Mensagens flash ficam disponiveis em qualquer renderizacao EJS.
   res.locals.errors = req.flash('errors');
   res.locals.success = req.flash('success');
 
-  // Exemplo de dado global para uso na camada de visualizacao.
+  // 🧠 Aprendizado: `res.locals` evita repetir dados em cada `res.render`.
   res.locals.usuario = req.session?.usuario || null;
   res.locals.csrfToken = req.csrfToken ? req.csrfToken() : '';
 
   next();
 };
 
+/**
+ * Trata falhas de token CSRF de forma amigável.
+ *
+ * @param {Error & {code?: string}} err
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
 globalMiddleware.checkCsrfError = (err, req, res, next) => {
   if (err && err.code === 'EBADCSRFTOKEN') {
     return res.render('404', {
@@ -18,9 +43,9 @@ globalMiddleware.checkCsrfError = (err, req, res, next) => {
       mensagem: 'Token CSRF invalido ou expirado. Tente recarregar a pagina.',
     });
   }
+
   return next(err);
 };
-  
 globalMiddleware.csrfMiddleware = (req, res, next) => {
   res.locals.csrfToken = req.csrfToken ? req.csrfToken() : '';
   next();
