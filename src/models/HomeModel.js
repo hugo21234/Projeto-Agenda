@@ -1,14 +1,28 @@
+/**
+ * Model da entidade Home (didático).
+ *
+ * Papel no sistema:
+ * - Exemplo simples de schema/model Mongoose.
+ *
+ * Conexão com outros arquivos:
+ * - Utilizado pelo `homeController` para criação de registro de exemplo.
+ */
 const mongoose = require('mongoose');
 
-// Schema define o formato e as validacoes do documento na collection.
+/**
+ * Schema da coleção Home.
+ */
 const HomeSchema = new mongoose.Schema({
-    titulo: {
-        type: String,
-        required: true },
-    descricao: String
+  titulo: {
+    type: String,
+    required: true,
+  },
+  descricao: String,
 });
 
-// Model e a interface para consultar e manipular dados da collection Home.
-const HomeModel =mongoose.model('Home', HomeSchema);
+/**
+ * Model para operações na coleção `Home`.
+ */
+const HomeModel = mongoose.model('Home', HomeSchema);
 
 module.exports = HomeModel;

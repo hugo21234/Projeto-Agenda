@@ -1,27 +1,32 @@
+<%#
+  Arquivo: views/includes/messages.ejs
+  Papel: renderizar feedbacks de erro/sucesso do fluxo de autenticação.
+  Conexão: usa `errors` e `success` vindos do connect-flash via globalMiddleware.
+%>
 <% if (errors && errors.length > 0) { %>
 <div class="row">
-    <div class="col my-3">
-        <div class="alert alert-danger" role="alert">
-            <ul class="mb-0">
-                <% errors.forEach((erro) => { %>
-                    <li><%= erro %></li>
-                <% }); %>
-            </ul>
-        </div>
+  <div class="col my-3">
+    <div class="alert alert-danger" role="alert">
+      <ul class="mb-0">
+        <% errors.forEach((erro) => { %>
+          <li><%= erro %></li>
+        <% }); %>
+      </ul>
     </div>
+  </div>
 </div>
 <% } %>
 
 <% if (success && success.length > 0) { %>
 <div class="row">
-    <div class="col my-3">
-        <div class="alert alert-success" role="alert">
-            <ul class="mb-0">
-                <% success.forEach((message) => { %>
-                    <li><%= message %></li>
-                <% }); %>
-            </ul>
-        </div>
+  <div class="col my-3">
+    <div class="alert alert-success" role="alert">
+      <ul class="mb-0">
+        <% success.forEach((message) => { %>
+          <li><%= message %></li>
+        <% }); %>
+      </ul>
     </div>
+  </div>
 </div>
 <% } %>
