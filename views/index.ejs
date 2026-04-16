@@ -1,21 +1,27 @@
+<%#
+  Arquivo: views/index.ejs
+  Papel: página inicial da aplicação (dashboard simples da agenda).
+  Conexão: renderizado por `homeController.index` e reutiliza includes de layout.
+%>
 <%- include('includes/head', { titulo }) %>
 <%- include('includes/nav') %>
 <%- include('includes/messages') %>
 
 <div class="container">
   <div class="row">
-  <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
 
     <div class="col-lg-8 my-3">
       <h1 class="display-1 text-center">Agenda</h1>
       <p class="text-center lead">Seus contatos estão abaixo</p>
-      
+
+      <%# ⚠️ Atenção: bloco de erro fixo é didático; ideal é vir de dados reais/flash. %>
       <div class="row">
         <div class="col">
           <div class="alert alert-danger">Um erro qualquer ocorreu.</div>
         </div>
       </div>
-      
+
       <div class="responsive-table">
         <table class="table">
           <tr>
@@ -25,12 +31,10 @@
             <td>hugo.deoliveira.legacy@gmail.com</td>
           </tr>
         </table>
-
       </div>
     </div>
 
-
-      <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
   </div>
 </div>
 

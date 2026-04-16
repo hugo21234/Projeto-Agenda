@@ -1,4 +1,9 @@
-﻿<%- include('includes/head', { titulo }) %>
+<%#
+  Arquivo: views/login.ejs
+  Papel: tela única de autenticação (registro + login).
+  Conexão: renderizada por `loginController.index`; envia formulários para rotas POST.
+%>
+<%- include('includes/head', { titulo }) %>
 <%- include('includes/nav') %>
 <%- include('includes/messages') %>
 
@@ -6,10 +11,9 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-6">
-      <!-- Formulario de criacao de conta. -->
       <h4 class="mb-4">Registre-se</h4>
       <form action="/login/register" method="POST">
-        <!-- Token CSRF obrigatorio para requisicoes POST seguras. -->
+        <!-- Middleware CSRF exige token para aceitar POST. -->
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="mb-3">
           <label for="email-register" class="form-label">Email</label>
@@ -24,10 +28,9 @@
     </div>
 
     <div class="col-lg-6">
-      <!-- Formulario de autenticacao de usuario existente. -->
       <h4 class="mb-4">Faca o Seu Login</h4>
       <form action="/login/login" method="POST">
-        <!-- Token CSRF obrigatorio para requisicoes POST seguras. -->
+        <!-- 🧠 Aprendizado: mesmo padrão de segurança do formulário de registro. -->
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="mb-3">
           <label for="email-login" class="form-label">Email</label>
