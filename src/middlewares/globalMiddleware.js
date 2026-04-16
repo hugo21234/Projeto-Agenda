@@ -20,15 +20,17 @@ globalMiddleware.checkCsrfError = (err, req, res, next) => {
   }
   return next(err);
 };
-
-exports.checkCsrfError = (err, req, res, next) => {
-  if (err && err.code === 'EBADCSRFTOKEN') {
-    return res.render('404')
-  }};
   
 globalMiddleware.csrfMiddleware = (req, res, next) => {
   res.locals.csrfToken = req.csrfToken ? req.csrfToken() : '';
   next();
 };
 
+globalMiddleware.loginRequired = (req, res, next) => {
+  if (!req.session.usuario) {
+    req.flash('errors', 'Voce precisa estar logado para acessar esta pagina.');
+    return req.session.save(() => res.redirect('/'));
+  }
+  return next();
+};
 module.exports = globalMiddleware;

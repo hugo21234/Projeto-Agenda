@@ -63,3 +63,9 @@ exports.login = async function (req, res) {
         });
     }
 }
+
+exports.logout = function (req, res) {
+    req.session.destroy(function () {
+        return res.redirect('/login/index');
+    });
+}

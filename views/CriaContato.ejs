@@ -1,0 +1,52 @@
+﻿<%- include('includes/head', { titulo }) %>
+<%- include('includes/nav') %>
+<%- include('includes/messages') %>
+<% const isEdit = typeof contato !== 'undefined' && contato && (contato._id || contato.id); %>
+<!-- Layout em duas colunas: cadastro (esquerda) e login (direita). -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-6">
+      <% if (isEdit) { %>
+        <h4 class="mb-4">Editar contato</h4>
+        <form action="/contato/edit/<%= contato._id || contato.id %>" method="POST">
+          <!-- Token CSRF obrigatorio para requisicoes POST seguras. -->
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <div class="mb-3">
+            <label for="email-register" class="form-label">email</label>
+            <input value="<%= contato.email %>" type="email" class="form-control" id="email-register" name="email" placeholder="Digite seu email" required>
+          </div>
+          <div class="mb-3">
+            <label for="nome-register" class="form-label">nome</label>
+            <input value="<%= contato.nome %>" type="text" class="form-control" id="nome-register" name="nome" placeholder="Digite seu nome" required>
+          </div>
+          <div class="mb-3">
+            <label for="number-register" class="form-label">number</label>
+            <input value="<%= contato.number %>" type="text" class="form-control" id="number-register" name="number" placeholder="Digite seu número de telefone" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Salvar alteracoes</button>
+        </form>
+      <% } else { %>
+        <h4 class="mb-4">Crie o contato</h4>
+        <form action="/criar-contato" method="POST">
+          <!-- Token CSRF obrigatorio para requisicoes POST seguras. -->
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <div class="mb-3">
+            <label for="email-register" class="form-label">email</label>
+            <input type="email" class="form-control" id="email-register" name="email" placeholder="Digite seu email" required>
+          </div>
+          <div class="mb-3">
+            <label for="nome-register" class="form-label">nome</label>
+            <input type="text" class="form-control" id="nome-register" name="nome" placeholder="Digite seu nome" required>
+          </div>
+          <div class="mb-3">
+            <label for="number-register" class="form-label">number</label>
+            <input type="text" class="form-control" id="number-register" name="number" placeholder="Digite seu número de telefone" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Registrar</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>

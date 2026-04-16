@@ -1,14 +1,11 @@
 const mongoose = require('mongoose');
+const { ContactModel } = require('./ContactModel');
+class HomeModel {
+  static async buscaContatos() {
+    return ContactModel.find().sort({ _id: -1 }); // mais novos primeiro
+  }
+}
 
-// Schema define o formato e as validacoes do documento na collection.
-const HomeSchema = new mongoose.Schema({
-    titulo: {
-        type: String,
-        required: true },
-    descricao: String
-});
 
-// Model e a interface para consultar e manipular dados da collection Home.
-const HomeModel =mongoose.model('Home', HomeSchema);
 
 module.exports = HomeModel;
